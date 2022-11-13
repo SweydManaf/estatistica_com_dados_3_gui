@@ -1,4 +1,4 @@
-# Cálculos estatisticos com dados do tipo 3
+# Cálculos estatisticos
  Programa desenvolvido com intuito de fazer o cálculo estatistico de dados do tipo III mais rápido.
 
 ## Pré-requisitos
