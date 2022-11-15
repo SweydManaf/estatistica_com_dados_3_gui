@@ -8,13 +8,13 @@ class Calculus:
 
         self.amplitudeTotal = round(max(self.vector) - min(self.vector), 2)
         self.numeroDeClasses = round(ceil(1 + 3.32 * log10(len(self.vector))), 2)
-        self.intervaloDeClasses = round(self.amplitudeTotal / self.numeroDeClasses, 2)
+        self.amplitudeDeClasses = round(self.amplitudeTotal / self.numeroDeClasses, 2)
 
         ########### NUMERO DE CLASSES ###################
         self.classes = []
         atuall = min(self.vector)
         for i in range(0, self.numeroDeClasses):
-            proximo = atuall + self.intervaloDeClasses
+            proximo = atuall + self.amplitudeDeClasses
             self.classes.append([round(atuall, 2), round(proximo, 2)])
             atuall = proximo
 
@@ -59,15 +59,38 @@ class Calculus:
                 self.medianaI = round(self.numeroDeClasses / 2 - 1)
             else:
                 self.medianaI = ceil(self.numeroDeClasses / 2 - 1)
-                self.mediana = round(self.classes[self.medianaI][0] + self.intervaloDeClasses * (
+                self.mediana = round(self.classes[self.medianaI][0] + self.amplitudeDeClasses * (
                     (len(self.vector) / 2) - self.frequenciaAcumulada[self.medianaI - 1]) / self.frequenciaAbsoluta[
                     self.medianaI], 2)
         except:
             self.mediana = None
 
-        ######
-        # self.modaI = self.frequenciaRelativa.index(max(self.frequenciaRelativa))
-        # self.moda = self.classes[self.modaI][0] + (self.frequenciaRelativa[self.modaI])
+        self.modaM = max(self.frequenciaAbsoluta)
+        self.modaI = [index for index in range(len(self.frequenciaAbsoluta)) if
+                      self.frequenciaAbsoluta[index] == self.modaM]
+        self.modas = []
+        for i in self.modaI:
+            try:
+                if i == 0:
+                    self.moda = self.classes[i][0] + (self.frequenciaAbsoluta[i + 1] / (
+                                0 + self.frequenciaAbsoluta[i + 1])) * self.amplitudeDeClasses
+                    self.modas.append(round(self.moda, 2))
+
+
+                elif i == (len(self.classes) - 1):
+                    self.moda = self.classes[i][0] + (
+                                0 / (self.frequenciaAbsoluta[i - 1] + 0)) * self.amplitudeDeClasses
+                    self.modas.append(round(self.moda, 2))
+
+
+                else:
+                    self.moda = self.classes[i][0] + (self.frequenciaAbsoluta[i + 1] / (
+                                self.frequenciaAbsoluta[i - 1] + self.frequenciaAbsoluta[
+                            i + 1])) * self.amplitudeDeClasses
+                    self.modas.append(round(self.moda, 2))
+
+            except:
+                self.modas = None
 
     def get_at(self):
         return self.amplitudeTotal
@@ -76,7 +99,7 @@ class Calculus:
         return self.numeroDeClasses
 
     def get_ac(self):
-        return self.intervaloDeClasses
+        return self.amplitudeDeClasses
 
     def get_classes(self):
         return self.classes
@@ -104,4 +127,4 @@ class Calculus:
         return self.mediana
 
     def get_moda(self):
-        pass
+        return self.modas
