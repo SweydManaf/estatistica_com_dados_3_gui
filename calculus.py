@@ -4,12 +4,6 @@ from math import log10, ceil
 class Calculus:
     def __init__(self, vector):
         self.vector = vector
-
-        # ######### teste self.vector = [1.99, 2.18, 2.03, 1.78, 1.43, 1.43, 1.92, 2.19, 1.74, 1.56, 2.16, 1.69,
-        # 2.22, 1.49, 1.44, 2.22, 1.46, 1.72, 2.01, 1.73, 1.70, 2.01, 1.66, 2.29, 1.76, 2.08, 1.48, 1.4, 1.95, 2.24]
-        # self.vector = [84, 74, 59, 67, 65, 68, 71, 80, 41, 95, 33, 81, 41, 78, 66, 52, 91, 50, 56, 48, 47, 65, 53, 94,
-        #                39, 73, 55, 65, 35, 69, 68, 57, 76, 45, 89, 61, 35, 85, 55, 98, 73, 85, 73, 64, 42, 77, 88, 60,
-        #                74, 54]
         self.vector.sort()
 
         self.amplitudeTotal = round(max(self.vector) - min(self.vector), 2)
@@ -61,10 +55,13 @@ class Calculus:
                 self.vector), 2)
 
         try:
-            self.medianaI = round(self.numeroDeClasses / 2 - 1)
-            self.mediana = round(self.classes[self.medianaI][0] + self.intervaloDeClasses * (
+            if self.numeroDeClasses % 2 == 0:
+                self.medianaI = round(self.numeroDeClasses / 2 - 1)
+            else:
+                self.medianaI = ceil(self.numeroDeClasses / 2 - 1)
+                self.mediana = round(self.classes[self.medianaI][0] + self.intervaloDeClasses * (
                     (len(self.vector) / 2) - self.frequenciaAbsoluta[self.medianaI - 1]) / self.frequenciaRelativa[
-                                     self.medianaI], 2)
+                    self.medianaI], 2)
         except:
             self.mediana = None
 
