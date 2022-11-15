@@ -23,35 +23,35 @@ class Calculus:
         for c in self.classes:
             self.centroDeClasses.append(round(round(c[0] + c[1], 2) / 2, 2))
 
-        # ######### FREQUENCIAS RELATIVAS ###################
-        self.frequenciaRelativa = []
+        # ######### FREQUENCIAS ABSOLUTAS ###################
+        self.frequenciaAbsoluta = []
         self.count = 0
         for limites in self.classes:
             self.count = 0
             for x in self.vector:
                 if limites[0] <= x < limites[1]:
                     self.count += 1
-            self.frequenciaRelativa.append(self.count)
+            self.frequenciaAbsoluta.append(self.count)
 
-        ########### FREQUENCIAS ABSOLUTAS ###################
-        self.frequenciaAbsoluta = [0]
+        ########### FREQUENCIAS ACUMULADAS ###################
+        self.frequenciaAcumulada = [0]
         for i in range(0, self.numeroDeClasses):
-            self.frequenciaAbsoluta.append(self.frequenciaRelativa[i] + self.frequenciaAbsoluta[i])
-        self.frequenciaAbsoluta.remove(0)
+            self.frequenciaAcumulada.append(self.frequenciaAbsoluta[i] + self.frequenciaAcumulada[i])
+        self.frequenciaAcumulada.remove(0)
 
         ########## FREQUENCIAS RELATIVAS PERCENTUAIS ################
         self.frequenciaRelativaPer = []
-        for i in self.frequenciaRelativa:
+        for i in self.frequenciaAbsoluta:
             self.frequenciaRelativaPer.append(round(i / len(self.vector) * 100, 2))
 
         ########## FREQUENCIA ABSOLUTA PERCENTUAL #####################
         self.frequenciaAbsolutaPer = []
-        for i in self.frequenciaAbsoluta:
+        for i in self.frequenciaAcumulada:
             self.frequenciaAbsolutaPer.append(round(i / len(self.vector) * 100, 2))
 
         ##############  MEDIDAS DE TENDENCIA ############################
         self.media = round(
-            sum([self.centroDeClasses[i] * self.frequenciaRelativa[i] for i in range(0, self.numeroDeClasses)]) / len(
+            sum([self.centroDeClasses[i] * self.frequenciaAbsoluta[i] for i in range(0, self.numeroDeClasses)]) / len(
                 self.vector), 2)
 
         try:
@@ -60,7 +60,7 @@ class Calculus:
             else:
                 self.medianaI = ceil(self.numeroDeClasses / 2 - 1)
                 self.mediana = round(self.classes[self.medianaI][0] + self.intervaloDeClasses * (
-                    (len(self.vector) / 2) - self.frequenciaAbsoluta[self.medianaI - 1]) / self.frequenciaRelativa[
+                    (len(self.vector) / 2) - self.frequenciaAcumulada[self.medianaI - 1]) / self.frequenciaAbsoluta[
                     self.medianaI], 2)
         except:
             self.mediana = None
@@ -85,11 +85,11 @@ class Calculus:
         return self.centroDeClasses
 
     def get_fi(self):
-        if sum(self.frequenciaRelativa) == len(self.vector):
-            return self.frequenciaRelativa
+        if sum(self.frequenciaAbsoluta) == len(self.vector):
+            return self.frequenciaAbsoluta
 
     def get_fa(self):
-        return self.frequenciaAbsoluta
+        return self.frequenciaAcumulada
 
     def get_fi_per(self):
         return self.frequenciaRelativaPer
