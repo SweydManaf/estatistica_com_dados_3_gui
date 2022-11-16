@@ -167,7 +167,7 @@ class WindowDataTable:
 
         self.mediaLabel = ttk.Label(self.mainFrame, text=f'Média = {self.calculos.get_media()}')
         self.medianaLabel = ttk.Label(self.mainFrame, text=f'Mediana = {self.calculos.get_mediana()}')
-        self.modaLabel = ttk.Label(self.mainFrame, text='Moda = ##')
+        self.modaLabel = ttk.Label(self.mainFrame, text=f'Moda = {self.calculos.get_moda()}')
 
         self.medidasButton = ttk.Button(self.mainFrame, text='Vizualizar medidas', width=20,
                                         command=self.medidas_function)
