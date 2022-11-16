@@ -123,7 +123,7 @@ class MainWindow:
 
 #########################################################################################################
 from calculus import Calculus
-
+import matplotlib.pyplot as plt
 
 class WindowDataTable:
     def __init__(self, master, vector):
@@ -172,9 +172,10 @@ class WindowDataTable:
         self.medidasButton = ttk.Button(self.mainFrame, text='Medidas de dispersão', width=20,
                                         command=self.medidas_function)
 
-        self.showHistButton = ttk.Button(self.mainFrame, text='Gerar gráfico em histograma', width=30)
+        self.showHistButton = ttk.Button(self.mainFrame, text='Gerar gráfico em histograma', width=30, command=self.hist_function)
         self.showHistButton.configure(padding=5)
-        self.showPolignButton = ttk.Button(self.mainFrame, text='Gerar gráfico de poligonos', width=25)
+        self.showPolignButton = ttk.Button(self.mainFrame, text='Gerar gráfico de poligonos', width=25, command=self.polign_function)
+        self.showState = False
 
         self.backButton = ttk.Button(self.mainFrame, text='Voltar', command=self.back_function)
 
@@ -227,3 +228,46 @@ class WindowDataTable:
     def back_function(self):
         self.mainFrame.destroy()
         MainWindow(self.master)
+
+    def hist_function(self):
+        if self.showState == False:
+            intervalos = self.calculos.get_classes()
+            classes = [intervalos[x][0] for x in range(self.calculos.get_k())]
+            classes.append(intervalos[self.calculos.get_k() - 1][1])
+
+            plt.title('Histograma')
+            plt.xlabel('Classes', fontsize=15)
+            plt.ylabel('Frequência Absoluta', fontsize=15)
+            plt.tick_params(labelsize=10)
+            plt.rcParams["figure.figsize"] = (4, 4)
+            plt.grid(visible=True, color='#607c8e')
+            plt.margins(x=0, y=0)
+            plt.yticks(self.calculos.get_fi())
+
+            self.showState = True
+
+            plt.hist(self.calculos.vector, bins=classes, rwidth=1, color='red', alpha=0.7, edgecolor='black')
+            plt.show()
+
+            self.showState = False
+
+    def polign_function(self):
+        if self.showState == False:
+            intervalos = self.calculos.get_classes()
+            classes = [intervalos[x][0] for x in range(self.calculos.get_k())]
+
+            plt.title('Gráfico de Poligonos')
+            plt.xlabel('Classes', fontsize=15)
+            plt.ylabel('Frequência Absoluta', fontsize=15)
+            plt.tick_params(labelsize=10)
+            plt.rcParams["figure.figsize"] = (4, 4)
+            plt.grid(visible=True, color='#607c8e')
+            plt.margins(x=0, y=0)
+            plt.yticks(self.calculos.get_fi())
+
+            self.showState = True
+
+            plt.plot(classes, self.calculos.get_fi(), color='red', alpha=0.7)
+            plt.show()
+
+            self.showState = False
