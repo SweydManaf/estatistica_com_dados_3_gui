@@ -169,7 +169,7 @@ class WindowDataTable:
         self.medianaLabel = ttk.Label(self.mainFrame, text=f'Mediana = {self.calculos.get_mediana()}')
         self.modaLabel = ttk.Label(self.mainFrame, text=f'Moda = {self.calculos.get_moda()}')
 
-        self.medidasButton = ttk.Button(self.mainFrame, text='Vizualizar medidas', width=20,
+        self.medidasButton = ttk.Button(self.mainFrame, text='Medidas de dispersão', width=20,
                                         command=self.medidas_function)
 
         self.showHistButton = ttk.Button(self.mainFrame, text='Gerar gráfico em histograma', width=30)
