@@ -34,6 +34,8 @@ python main.pyw
 ![Tela do programa](example-1.png)
 ### Resultado dos cálculos
 ![Tela do programa](example-2.png)
+### Visualizando no gráfico de histograma
+![Tela do programa](example-3.png)
 
 
 ## Colaboradores
