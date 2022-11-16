@@ -15,18 +15,6 @@ class MainWindow:
         self.width = 500
         self.master.geometry(f'{self.width}x{self.height}')
 
-        # MENU BAR
-        self.menuBar = Menu(self.master, tearoff=False)
-
-        self.master.config(menu=self.menuBar)
-
-        self.file_menu = Menu(self.menuBar)
-
-        self.subMenuVectore = Menu(self.file_menu, tearoff=False)
-
-        self.menuBar.add_cascade(label='Dica', menu=self.file_menu)
-        self.file_menu.add_cascade(label='Vetores usados', menu=self.subMenuVectore)
-
         # MAIN FRAME
         self.mainFrame = ttk.Frame(self.master, width=500, height=500)
 
@@ -74,9 +62,10 @@ class MainWindow:
 
     def validate_number(self):
         data = self.dataVar.get().replace(',', '.')
-        if float(data) >= 0 or data == '0':
-            return True
-        else:
+        try:
+            if float(data) >= 0 or data == '0':
+                return True
+        except:
             return False
 
     def enter_function(self):
@@ -109,16 +98,11 @@ class MainWindow:
 
     def submit_function(self):
         if len(self.dataInVector) >= 30:
-            self.menuBar.destroy()
             self.mainFrame.destroy()
-            self.add_vector_to_menu()
             WindowDataTable(self.master, self.dataInVector)
         else:
             messagebox.showwarning('Amostra incompleta', 'A amostra dos dados do tipo III deve ser maior ou igual a 30')
             self.dataEntry.focus()
-
-    def add_vector_to_menu(self):
-        pass
 
 
 #########################################################################################################
