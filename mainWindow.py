@@ -125,6 +125,7 @@ class MainWindow:
 from calculus import Calculus
 import matplotlib.pyplot as plt
 
+
 class WindowDataTable:
     def __init__(self, master, vector):
         self.master = master
@@ -172,9 +173,11 @@ class WindowDataTable:
         self.medidasButton = ttk.Button(self.mainFrame, text='Medidas de dispersão', width=20,
                                         command=self.medidas_function)
 
-        self.showHistButton = ttk.Button(self.mainFrame, text='Gerar gráfico em histograma', width=30, command=self.hist_function)
+        self.showHistButton = ttk.Button(self.mainFrame, text='Gerar gráfico em histograma', width=30,
+                                         command=self.hist_function)
         self.showHistButton.configure(padding=5)
-        self.showPolignButton = ttk.Button(self.mainFrame, text='Gerar gráfico de poligonos', width=25, command=self.polign_function)
+        self.showPolignButton = ttk.Button(self.mainFrame, text='Gerar gráfico de poligonos', width=25,
+                                           command=self.polign_function)
         self.showState = False
 
         self.backButton = ttk.Button(self.mainFrame, text='Voltar', command=self.back_function)
@@ -230,7 +233,7 @@ class WindowDataTable:
         MainWindow(self.master)
 
     def hist_function(self):
-        if self.showState == False:
+        if not self.showState:
             intervalos = self.calculos.get_classes()
             classes = [intervalos[x][0] for x in range(self.calculos.get_k())]
             classes.append(intervalos[self.calculos.get_k() - 1][1])
@@ -252,7 +255,7 @@ class WindowDataTable:
             self.showState = False
 
     def polign_function(self):
-        if self.showState == False:
+        if not self.showState:
             intervalos = self.calculos.get_classes()
             classes = [intervalos[x][0] for x in range(self.calculos.get_k())]
 
