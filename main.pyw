@@ -8,7 +8,7 @@ from mainWindow import MainWindow
 class MainApp:
     def __init__(self):
         self.root = Tk()
-        self.root.title('Estatistíca de F. Beira')
+        self.root.title('Estatistíca AAL')
 
         # CONFIGURING THE ROOT WINDOWS
         self.height = 500
