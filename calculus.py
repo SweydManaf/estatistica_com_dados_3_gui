@@ -23,7 +23,7 @@ class Calculus:
         for c in self.classes:
             self.centroDeClasses.append(round(round(c[0] + c[1], 2) / 2, 2))
 
-        # ######### FREQUENCIAS ABSOLUTAS ###################
+        ########## FREQUENCIAS ABSOLUTAS ###################
         self.frequenciaAbsoluta = []
         self.count = 0
         for limites in self.classes:
