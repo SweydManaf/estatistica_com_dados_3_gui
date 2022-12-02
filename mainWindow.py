@@ -207,7 +207,7 @@ class WindowDataTable:
                 self.dataTable.insert('', END, values=(
                     i + 1, f'[ {intervalos[i][0]} ; {intervalos[i][1]} [', ci[i], fi[i], fa[i], fi_per[i], fa_per[i]))
         except:
-            messagebox.showerror('Erro', 'Algum erro ocorreu')
+            messagebox.showerror('Erro', 'Algum erro critico ocorreu')
 
     def medidas_function(self):
         messagebox.showerror('Em desenvolvimento', 'Função não implementada')
